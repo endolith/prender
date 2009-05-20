@@ -42,14 +42,44 @@ class BaseRenderer:
         self._sendMessage( "SMOOTH" )
 
     def background(self, r, g, b):
+        """Sets the color used for the background of the Processing window
+        
+        The default background is light gray. In the draw() function, the 
+        background color is used to clear the display window at the beginning of 
+        each frame. 
+        
+        An image can also be used as the background for a sketch, however its 
+        width and height must be the same size as the sketch window. To resize 
+        an image 'b' to the size of the sketch window, use b.resize(width, 
+        height). 
+        
+        Images used as background will ignore the current tint() setting. 
+        
+        It is not possible to use transparency (alpha) in background colors with 
+        the main drawing surface, however they will work properly with 
+        createGraphics.
+        """
         message = struct.pack("BBB",r,g,b);
         self._sendMessage( "BACKGROUND", message )
 
     def line(self, x1, y1, x2, y2):
+        """Draws a line (a direct path between two points) to the screen
+        
+        The version of line() with four parameters draws the line in 2D. To 
+        color a line, use the stroke() function. A line cannot be filled, 
+        therefore the fill() method will not affect the color of a line. 2D 
+        lines are drawn with a width of one pixel by default, but this can be 
+        changed with the strokeWeight() function.
+        """
         message = struct.pack(">ffff", x1, y1, x2, y2)
         self._sendMessage( "LINE", message )
         
     def point(self, x, y):
+        """Draws a point, a coordinate in space at the dimension of one pixel
+        
+        The first parameter is the horizontal value for the point, the second 
+        value is the vertical value for the point.
+        """
         message = struct.pack(">ff", x, y)
         self._sendMessage( "POINT", message )
         
