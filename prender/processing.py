@@ -58,7 +58,7 @@ class BaseRenderer:
         self._sendMessage( "ELLIPSE", message )
 
     def save(self, filename):
-        message = filename.encode('ascii')+b"\n"
+        message = filename.encode('ascii')+"\n"
         self._sendMessage( "DRAW", message )
         
     def saveLocal(self, filename):
